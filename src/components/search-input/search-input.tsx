@@ -26,9 +26,7 @@ const SearchInput: React.FC<ISeatchInput> = ({
 
   const onKeyDownDoFetch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && document.activeElement?.id === 'input_search') {
-      if (searchValue) {
-        dispatch(setValueInput(searchValue));
-      }
+      dispatch(setValueInput(searchValue));
       dispatch(setSortByCategories(categories));
       dispatch(setSortBy(sortBy));
       dispatch(fetchBooks());
@@ -36,9 +34,7 @@ const SearchInput: React.FC<ISeatchInput> = ({
   };
 
   const onClickIcon = () => {
-    if (searchValue) {
-      dispatch(setValueInput(searchValue));
-    }
+    dispatch(setValueInput(searchValue));
     dispatch(setSortByCategories(categories));
     dispatch(setSortBy(sortBy));
     dispatch(fetchBooks());
