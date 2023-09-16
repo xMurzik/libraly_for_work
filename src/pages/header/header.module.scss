@@ -1,0 +1,23 @@
+.containerHeader {
+  height: 40vh;
+  background-image: url('../../../public/2964938.jpg');
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.formWrapper {
+  width: 50vw;
+  margin: 0 auto 0 auto;
+}
+
+.titleProject {
+  margin-bottom: 40px;
+  color: white;
+  font-size: 7rem;
+  text-align: center;
+
+  @media (max-width: 610px) {
+    font-size: 3.5rem;
+  }
+}

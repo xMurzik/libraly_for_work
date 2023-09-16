@@ -1,0 +1,13 @@
+.containerFrom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 20px;
+}
+
+.selectors {
+  display: flex;
+  width: 70%;
+  justify-content: space-around;
+  column-gap: 15px;
+}

@@ -1,0 +1,35 @@
+.searchInput {
+  height: 30px;
+  width: 100%;
+  min-width: 300px;
+  font-size: 2rem;
+  border: 1px solid grey;
+  padding-left: 5px;
+  transition: box-shadow 0.5s ease;
+  padding-right: 35px;
+}
+
+.searchInput:focus {
+  outline: none;
+  box-shadow: 4px 6px 30px 16px rgba(225, 160, 56, 0.2);
+}
+
+.wrapper {
+  display: inline-block;
+  width: 70%;
+  position: relative;
+  min-width: 310px;
+}
+
+.icon {
+  right: 0;
+  position: absolute;
+  color: grey;
+  font-size: 3rem;
+  transition: color 0.5s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    color: black;
+  }
+}
