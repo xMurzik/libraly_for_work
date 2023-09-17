@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../store';
 import { API_KEY, MAIN_URL } from '../../consts/api';
 import { setError, setNextPage } from './books-slice';
-import { IBooks } from '../../types/books';
+import { IBooks, items } from '../../types/books';
 
 export const fetchBooks = createAsyncThunk<
   IBooks,
@@ -29,7 +29,7 @@ export const fetchBooks = createAsyncThunk<
 });
 
 export const fetchMoreBooks = createAsyncThunk<
-  IBooks,
+  Array<items>,
   undefined,
   { dispatch: AppDispatch; state: State }
 >('books/fetchMoreBooks', async (_, { dispatch, getState }) => {
@@ -47,7 +47,36 @@ export const fetchMoreBooks = createAsyncThunk<
     }
     dispatch(setNextPage(false));
     const ans = await res.json();
-    console.log(ans);
+
+    let books: Array<items> = [];
+
+    if (ans.items) {
+      const prevBooks = getState().books.booksList?.items;
+
+      if (prevBooks) {
+        books = [...prevBooks, ...ans.items];
+
+        const arrayOfUniqIds = Array.from(new Set(books.map((el) => el.id)));
+
+        const firstPart = arrayOfUniqIds.map((id) => {
+          const book = prevBooks.find((book) => book.id === id);
+
+          return book ? book : id;
+        });
+
+        const lastPart = firstPart.map((id) => {
+          if (typeof id === 'string') {
+            const book = ans.items.find((el: items) => el.id === id);
+
+            return book ? book : id;
+          }
+          return id;
+        });
+
+        return lastPart as Array<items>;
+      }
+    }
+
     return ans;
   } catch {
     dispatch(setError());

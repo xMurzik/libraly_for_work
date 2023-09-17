@@ -71,15 +71,11 @@ const booksSlice = createSlice({
       })
       .addCase(fetchMoreBooks.fulfilled, (state, action) => {
         state.isLoading = false;
-
-        if (action.payload.items) {
-          if (state.booksList?.items) {
-            state.booksList.items = [
-              ...state.booksList.items,
-              ...action.payload.items,
-            ];
+        if (state.booksList?.items) {
+          if ('totalItems' in action.payload) {
             return;
           }
+          state.booksList.items = [...action.payload];
         }
       });
   },
