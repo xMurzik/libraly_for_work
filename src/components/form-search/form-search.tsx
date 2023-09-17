@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import SearchInput from '../search-input/search-input';
-import SelectSortBy from '../select-sort-by/select-sort-by';
-import SelectSortByCategories from '../select-sort-by-categories/select-sort-by-categories';
 import { Category, SortingBy } from '../../consts/common';
+import SelectSort from '../select-sort/select-sort';
 import s from './form-search.module.scss';
 
 const FormSearch: React.FC = () => {
@@ -19,11 +18,18 @@ const FormSearch: React.FC = () => {
         setSearchValue={setSearchValue}
       />
       <div className={s.selectors}>
-        <SelectSortByCategories
-          categories={categories}
-          setCategories={setCategories}
+        <SelectSort
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          spanValue="Sorting by"
+          arrOfVal={Object.values(SortingBy)}
         />
-        <SelectSortBy sortBy={sortBy} setSortBy={setSortBy} />
+        <SelectSort
+          sortBy={categories}
+          setSortBy={setCategories}
+          spanValue="Categories"
+          arrOfVal={Object.values(Category)}
+        />
       </div>
     </div>
   );

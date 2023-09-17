@@ -43,7 +43,12 @@ const booksSlice = createSlice({
       }
       state.booksPage += 1;
     },
-    setError: (state) => {
+    setError: (state, action: PayloadAction<boolean | undefined>) => {
+      if (action.payload) {
+        state.isError = false;
+        return;
+      }
+
       state.isError = true;
     },
   },
@@ -51,10 +56,10 @@ const booksSlice = createSlice({
     builder
       .addCase(fetchBooks.pending, (state) => {
         state.isLoading = true;
-        state.isError = false;
       })
       .addCase(fetchBooks.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.isError = false;
         state.booksList = action.payload;
       })
       .addCase(fetchBooks.rejected, (state) => {

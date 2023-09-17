@@ -15,6 +15,11 @@
   margin-top: 10px;
   box-shadow: 29px 33px 29px 0px rgba(34, 60, 80, 0.2);
   object-fit: fill;
+
+  &:hover {
+    cursor: pointer;
+    scale: 1.05;
+  }
 }
 
 .categories {

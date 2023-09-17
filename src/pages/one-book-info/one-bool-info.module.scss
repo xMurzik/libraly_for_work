@@ -1,0 +1,146 @@
+.mainWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: beige;
+
+  @media (max-width: 720px) {
+    display: block;
+    height: auto;
+    min-height: 100vh;
+    padding-bottom: 50px;
+  }
+}
+
+.bookContent {
+  display: flex;
+  justify-content: space-around;
+  height: 90vh;
+  width: 95vw;
+  column-gap: 20px;
+
+  @media (max-width: 720px) {
+    display: unset;
+  }
+}
+
+.imgWrapper {
+  width: 40%;
+  min-width: 300px;
+  background-color: rgba(128, 128, 128, 0.434);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 720px) {
+    padding-top: 50px;
+    margin: 0 auto 50px auto;
+    background-color: unset;
+  }
+}
+
+.bookImg {
+  object-fit: cover;
+  box-shadow: 4px 18px 34px 0px rgba(34, 60, 80, 0.36);
+  width: 80%;
+  max-height: 750px;
+}
+
+.textInfoBook {
+  background-color: rgba(128, 128, 128, 0.434);
+  width: 60%;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
+  @media (max-width: 720px) {
+    margin: 0 auto 0 auto;
+    width: 80%;
+  }
+}
+
+.wrapperText {
+  height: 80%;
+  width: 85%;
+}
+
+.categories {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  text-align: center;
+  color: grey;
+  @media (max-width: 720px) {
+    margin-top: 50px;
+  }
+}
+
+.title {
+  font-size: 3rem;
+  text-align: center;
+}
+
+.authorsContainer {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.oneAuthor {
+  font-size: 1.5rem;
+  text-wrap: nowrap;
+}
+
+.description {
+  margin-top: 30px;
+  text-wrap: balance;
+  font-size: 1.2rem;
+  max-height: 400px;
+  overflow-y: auto;
+  text-align: center;
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(49, 49, 59, 0.406);
+    border-radius: 20px;
+  }
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(130, 121, 103, 0.256);
+    border-radius: 5px;
+  }
+
+  @media (max-width: 720px) {
+    overflow-y: unset;
+    max-height: min-content;
+    margin-bottom: 30px;
+  }
+}
+
+.noDescription {
+  text-align: center;
+}
+
+.linkToHome {
+  text-decoration: none;
+  color: black;
+  font-weight: 800;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  font-size: 2rem;
+  transform: translate(-50%, 50%);
+  transition: all 0.2s ease;
+  &:hover {
+    scale: 1.05;
+    margin-left: 3px;
+    color: grey;
+  }
+}

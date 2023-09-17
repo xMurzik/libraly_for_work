@@ -10,25 +10,22 @@ export const fetchBooks = createAsyncThunk<
   { dispatch: AppDispatch; state: State }
 >('books/fetchBooks', async (_, { dispatch, getState }) => {
   dispatch(setNextPage(true));
-  try {
-    const res = await fetch(
-      `${MAIN_URL}?q=${getState().books.valueInput}+subject:${
-        getState().books.sortByCategories
-      }&maxResults=30&startIndex=${0}&orderBy=${
-        getState().books.sortBy
-      }&key=${API_KEY}`
-    );
 
-    if (!res.ok) {
-      throw Error('Error');
-    }
+  const res = await fetch(
+    `${MAIN_URL}?q=${getState().books.valueInput}+subject:${
+      getState().books.sortByCategories
+    }&maxResults=30&startIndex=${0}&orderBy=${
+      getState().books.sortBy
+    }&key=${API_KEY}`
+  );
 
-    const ans = await res.json();
-
-    return ans;
-  } catch {
-    dispatch(setError());
+  if (!res.ok) {
+    throw Error('Error');
   }
+
+  const ans = await res.json();
+
+  return ans;
 });
 
 export const fetchMoreBooks = createAsyncThunk<
@@ -48,7 +45,7 @@ export const fetchMoreBooks = createAsyncThunk<
     );
 
     if (!res.ok) {
-      throw Error('Error');
+      throw new Error('Error');
     }
 
     const ans = await res.json();

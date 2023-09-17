@@ -1,13 +1,14 @@
 import React from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import s from './search-input.module.scss';
-import { useAppDispatch } from '../../hooks/redux-hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { fetchBooks } from '../../store/books-slice/async-books';
 import {
   setSortBy,
   setSortByCategories,
   setValueInput,
 } from '../../store/books-slice/books-slice';
+import { getStatusError } from '../../store/books-slice/book-selectors';
 
 interface ISeatchInput {
   searchValue: string;
@@ -23,6 +24,7 @@ const SearchInput: React.FC<ISeatchInput> = ({
   setSearchValue,
 }) => {
   const dispatch = useAppDispatch();
+  const isError = useAppSelector(getStatusError);
 
   const onKeyDownDoFetch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && document.activeElement?.id === 'input_search') {
@@ -34,6 +36,9 @@ const SearchInput: React.FC<ISeatchInput> = ({
   };
 
   const onClickIcon = () => {
+    if (isError) {
+      return;
+    }
     dispatch(setValueInput(searchValue));
     dispatch(setSortByCategories(categories));
     dispatch(setSortBy(sortBy));
@@ -49,6 +54,7 @@ const SearchInput: React.FC<ISeatchInput> = ({
         type="text"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
+        disabled={isError}
       />
       <AiOutlineSearch onClick={onClickIcon} className={s.icon} />
     </div>
