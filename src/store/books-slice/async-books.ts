@@ -33,8 +33,6 @@ export const fetchMoreBooks = createAsyncThunk<
   undefined,
   { dispatch: AppDispatch; state: State }
 >('books/fetchMoreBooks', async (_, { dispatch, getState }) => {
-  dispatch(setNextPage(false));
-
   try {
     const res = await fetch(
       `${MAIN_URL}?q=${getState().books.valueInput}+subject:${
@@ -47,9 +45,9 @@ export const fetchMoreBooks = createAsyncThunk<
     if (!res.ok) {
       throw new Error('Error');
     }
-
+    dispatch(setNextPage(false));
     const ans = await res.json();
-
+    console.log(ans);
     return ans;
   } catch {
     dispatch(setError());

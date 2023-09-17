@@ -19,7 +19,7 @@ const initialState: IBooksSlice = {
   sortByCategories: Category.all,
   valueInput: '',
   isLoading: false,
-  booksPage: 0,
+  booksPage: 1,
   isError: false,
 };
 
@@ -38,7 +38,7 @@ const booksSlice = createSlice({
     },
     setNextPage: (state, action: PayloadAction<boolean>) => {
       if (action.payload) {
-        state.booksPage = 0;
+        state.booksPage = 1;
         return;
       }
       state.booksPage += 1;
@@ -71,18 +71,14 @@ const booksSlice = createSlice({
       })
       .addCase(fetchMoreBooks.fulfilled, (state, action) => {
         state.isLoading = false;
+
         if (action.payload.items) {
           if (state.booksList?.items) {
-            if (
-              state.booksList.items.length + 30 !==
-              state.booksList.totalItems
-            ) {
-              state.booksList.items = [
-                ...state.booksList.items,
-                ...action.payload.items,
-              ];
-              return;
-            }
+            state.booksList.items = [
+              ...state.booksList.items,
+              ...action.payload.items,
+            ];
+            return;
           }
         }
       });
